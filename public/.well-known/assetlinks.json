@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.vishakarex.winngoocoin",
+      "sha256_cert_fingerprints": [
+        "21:6F:7A:23:92:0D:14:AC:70:F2:22:19:82:C5:1E:E1:DB:EE:60:A6:58:08:EB:1E:4E:A0:0B:B3:41:2E:C8:AF"
+      ]
+    }
+  }
+]
