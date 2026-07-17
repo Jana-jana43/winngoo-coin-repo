@@ -2,28 +2,30 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main',
-                    credentialsId: 'github-ssh',
-                    url: 'git@github.com:Jana-jana43/winngoo-coin-repo.git'
-            }
-        }
 
-        stage('Deploy') {
+        stage('Deploy to Production') {
             steps {
                 sh '''
-                ssh -i /var/lib/jenkins/.ssh/id_ed25519 ubuntu@172.31.43.143 << 'EOF'
-                cd /var/www/newproject.com
+                ssh -i /var/lib/jenkins/.ssh/deploy_ed25519 ubuntu@172.31.43.143 << 'EOF'
 
-                if [ ! -d .git ]; then
-                    git clone git@github.com:Jana-jana43/winngoo-coin-repo.git .
-                else
-                    git pull origin main
-                fi
+                cd /var/www/winngoomodel.com
+
+                git pull origin main
+
+                composer install --no-interaction --prefer-dist
+
+                php artisan migrate --force
+
+                php artisan optimize:clear
+
+                php artisan optimize
+
+                exit
+
                 EOF
                 '''
             }
         }
+
     }
 }
