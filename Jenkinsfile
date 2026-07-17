@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     stages {
-
         stage('Deploy to Production') {
             steps {
                 sh '''
@@ -20,12 +19,9 @@ pipeline {
 
                 php artisan optimize
 
-                exit
-
                 EOF
                 '''
             }
         }
-
     }
 }
